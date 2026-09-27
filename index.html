@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Legends Of Chamberlain Heights</title>
+
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+@font-face {
+    font-family: "Terminal";
+    src: url("https://imgekkefries.pythonanywhere.com/terminal.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --s0: #0e0f13;
+    --s1: #15161c;
+    --s2: #1b1d24;
+    --s3: #22242d;
+    --s4: #2a2d38;
+    --l1: #262932;
+    --l2: #323641;
+    --t1: #f4f5f8;
+    --t2: #b9bcc8;
+    --t3: #7c8091;
+    --t4: #50535e;
+    --a1: #8ea3ff;
+    --a2: #ffffff;
+    --pageMax: 1400px;
+    --padX: clamp(16px, 2.4vw, 48px);
+    --padY: clamp(24px, 3vw, 56px);
+    --fontMono: "Terminal", "SF Mono", Menlo, Consolas, monospace;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --dur: 380ms;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+    background: var(--s0);
+    color: var(--t1);
+    font-family: var(--fontMono);
+    font-size: clamp(12px, 0.5vw + 10px, 17px);
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    padding: var(--padY) var(--padX);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 70% 55% at 15% 0%, #1a1c24 0%, transparent 65%),
+        radial-gradient(ellipse 70% 55% at 85% 100%, #181a21 0%, transparent 65%),
+        radial-gradient(ellipse 120% 40% at 50% -10%, #1c1e27 0%, transparent 60%),
+        linear-gradient(180deg, #12131a 0%, #0e0f13 100%);
+}
+
+::selection { background: var(--a1); color: var(--s0); }
+
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar,
+body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+.wrap {
+    max-width: var(--pageMax);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.brand {
+    display: inline-block;
+    font-size: clamp(28px, 5.2vw, 92px);
+    letter-spacing: 0.01em;
+    line-height: 1;
+    font-weight: normal;
+    color: var(--t1);
+    margin-bottom: clamp(20px, 3vw, 56px);
+    user-select: none;
+    white-space: nowrap;
+    animation: brandIn 0.6s ease both;
+}
+.brand .tld { color: var(--t4); }
+
+@keyframes brandIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<style>
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(12px, 2vw, 32px);
+    margin-bottom: clamp(28px, 4vw, 64px);
+    padding-bottom: clamp(14px, 1.6vw, 22px);
+    border-bottom: 1px solid var(--l1);
+    animation: fadeDown 0.5s ease both;
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.barL { flex: 1; }
+.barC {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--t3);
+    font-size: clamp(11px, 0.4vw + 8px, 14px);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    user-select: none;
+}
+.barR { flex: 1; }
+</style>
+
+<style>
+.shell {
+    background: var(--s2);
+    border: 1px solid var(--l1);
+    border-radius: clamp(6px, 0.7vw, 12px);
+    overflow: hidden;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.02) inset,
+        0 16px 40px -24px rgba(0, 0, 0, 0.9);
+    animation: fadeUp 0.5s ease both;
+    margin-bottom: clamp(20px, 3vw, 40px);
+}
+
+.frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    background: #000;
+}
+</style>
+
+<style>
+.grid {
+    display: grid;
+    grid-template-columns: clamp(140px, 14vw, 200px) 1fr;
+    gap: clamp(10px, 1vw, 18px);
+    animation: fadeUp 0.55s ease both;
+    margin-bottom: clamp(20px, 3vw, 48px);
+}
+
+@media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+}
+
+.seasons {
+    position: sticky;
+    top: clamp(16px, 2vw, 32px);
+    background: var(--s2);
+    border: 1px solid var(--l1);
+    border-radius: clamp(6px, 0.7vw, 12px);
+    padding: clamp(6px, 0.6vw, 10px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2px, 0.3vw, 6px);
+    height: fit-content;
+    isolation: isolate;
+}
+
+@media (max-width: 640px) {
+    .seasons { position: static; flex-direction: row; flex-wrap: wrap; }
+}
+
+.tab {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: none;
+    color: var(--t3);
+    font-family: inherit;
+    font-size: clamp(11px, 0.4vw + 8px, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: clamp(10px, 0.9vw, 14px) clamp(12px, 1.1vw, 18px);
+    border-radius: clamp(6px, 0.5vw, 10px);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .tab { width: auto; flex: 1 1 auto; justify-content: center; }
+}
+
+.tab:hover { color: var(--t2); }
+.tab.on { color: var(--t1); }
+
+.tabGlide {
+    position: absolute;
+    left: clamp(6px, 0.6vw, 10px);
+    right: clamp(6px, 0.6vw, 10px);
+    background: var(--s3);
+    border: 1px solid var(--l2);
+    border-radius: clamp(6px, 0.5vw, 10px);
+    pointer-events: none;
+    z-index: 0;
+    transition:
+        top var(--dur) var(--ease),
+        height var(--dur) var(--ease);
+    will-change: top, height;
+}
+
+@media (max-width: 640px) {
+    .tabGlide { display: none; }
+    .tab.on { background: var(--s3); border: 1px solid var(--l2); }
+}
+
+.listBox {
+    background: var(--s2);
+    border: 1px solid var(--l1);
+    border-radius: clamp(6px, 0.7vw, 12px);
+    overflow: hidden;
+    min-height: clamp(200px, 30vh, 400px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.02) inset,
+        0 16px 40px -24px rgba(0, 0, 0, 0.9);
+}
+
+.listHead {
+    padding: clamp(10px, 1vw, 20px) clamp(12px, 1.4vw, 26px);
+    background: var(--s3);
+    border-bottom: 1px solid var(--l1);
+    color: var(--t3);
+    font-size: clamp(10px, 0.35vw + 8px, 13px);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+
+.listHead .num { color: var(--a1); font-variant-numeric: tabular-nums; }
+
+.list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+}
+
+.row {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--l1);
+    color: var(--t2);
+    font-family: inherit;
+    font-size: clamp(12px, 0.35vw + 10px, 16px);
+    padding: clamp(12px, 1.1vw, 18px) clamp(14px, 1.4vw, 26px);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1vw, 18px);
+    transition: color 0.2s ease;
+    width: 100%;
+}
+
+.row:last-child { border-bottom: none; }
+.row:hover { color: var(--t1); }
+.row.on { color: var(--t1); }
+
+.rowGlide {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: var(--s3);
+    box-shadow: inset 3px 0 0 var(--a1);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition:
+        top var(--dur) var(--ease),
+        height var(--dur) var(--ease),
+        opacity 0.2s ease;
+    will-change: top, height;
+}
+
+.rowGlide.on { opacity: 1; }
+
+.rowNum {
+    color: var(--t3);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    min-width: 3.2em;
+    transition: color 0.2s ease;
+}
+
+.row:hover .rowNum,
+.row.on .rowNum { color: var(--a1); }
+
+.rowName {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+}
+
+.rowPlay {
+    color: var(--t4);
+    font-size: 0.85em;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.row:hover .rowPlay { color: var(--a1); }
+.row.on .rowPlay { color: var(--a1); }
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+    <div id="barMount"></div>
+
+    <h1 class="brand">Legends Of Chamberlain Heights<span class="tld">.xyz</span></h1>
+
+    <div id="playerMount"></div>
+    <div id="listMount"></div>
+</div>
+
+<script>
+window.Vps = null;
+window.VpsPromise = null;
+
+window.GetVps = function () {
+    if (window.Vps) return Promise.resolve(window.Vps);
+    if (window.VpsPromise) return window.VpsPromise;
+    window.VpsPromise = fetch("https://imgekkefries.pythonanywhere.com/vps")
+        .then(function (r) { return r.text(); })
+        .then(function (t) {
+            window.Vps = String(t).trim().replace(/\/$/, "");
+            return window.Vps;
+        });
+    return window.VpsPromise;
+};
+</script>
+
+<template id="tplBar">
+    <div class="bar" id="bar">
+        <div class="barL"></div>
+        <div class="barC">Gemaakt Door Sam :)</div>
+        <div class="barR"></div>
+    </div>
+</template>
+
+<script>
+(function () {
+    "use strict";
+    function mountBar() {
+        const tpl = document.getElementById("tplBar");
+        const slot = document.getElementById("barMount");
+        if (tpl && slot) slot.appendChild(tpl.content.cloneNode(true));
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", mountBar);
+    } else {
+        mountBar();
+    }
+})();
+</script>
+
+<template id="tplPlayer">
+    <div class="shell" id="playerShell">
+        <div class="frame">
+            <iframe
+                id="playerFrame"
+                src="about:blank"
+                allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                allowfullscreen
+                referrerpolicy="no-referrer"
+            ></iframe>
+        </div>
+    </div>
+</template>
+
+<script>
+(function () {
+    "use strict";
+
+    const P = {
+        el: null,
+
+        ready() {
+            if (this.el && document.body.contains(this.el)) return true;
+            this.el = document.getElementById("playerFrame");
+            return !!this.el;
+        },
+
+        play(url) {
+            if (!this.ready()) return false;
+            this.el.src = url;
+            return true;
+        },
+
+        stop() {
+            if (!this.ready()) return false;
+            this.el.src = "about:blank";
+            return true;
+        },
+    };
+
+    window.Player = P;
+
+    function mountPlayer() {
+        const tpl = document.getElementById("tplPlayer");
+        const slot = document.getElementById("playerMount");
+        if (tpl && slot && !document.getElementById("playerShell")) {
+            slot.appendChild(tpl.content.cloneNode(true));
+        }
+        P.ready();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", mountPlayer);
+    } else {
+        mountPlayer();
+    }
+})();
+</script>
+
+<template id="tplList">
+    <div class="grid">
+        <div class="seasons" id="seasons" role="tablist" aria-label="Seasons">
+            <div class="tabGlide" id="tabGlide"></div>
+        </div>
+        <div class="listBox">
+            <div class="listHead">
+                <span id="listLabel">—</span>
+                <span class="num" id="listCount">0 episodes</span>
+            </div>
+            <div class="list" id="list">
+                <div class="rowGlide" id="rowGlide"></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+(function () {
+    "use strict";
+
+    const show = {
+        seasons: [
+            {
+                id: 1,
+                episodes: Array.from({ length: 10 }, (_, i) => ({
+                    ep: i + 1,
+                    folder: `Legends Of Chamberlain Heights [S01 EP${String(i + 1).padStart(2, "0")}]`,
+                })),
+            },
+            {
+                id: 2,
+                episodes: Array.from({ length: 10 }, (_, i) => ({
+                    ep: i + 1,
+                    folder: `Legends Of Chamberlain Heights [S02 EP${String(i + 1).padStart(2, "0")}]`,
+                })),
+            },
+        ],
+    };
+
+    const base = "LegendsOfChamberlainHeights";
+    const storeKey = "CurrentEp";
+
+    let season = 1;
+    let seasonsEl = null;
+    let tabGlideEl = null;
+    let listEl = null;
+    let rowGlideEl = null;
+    let labelEl = null;
+    let countEl = null;
+
+    function save(seasonId, episodeId) {
+        try {
+            localStorage.setItem(storeKey, JSON.stringify({ season: seasonId, episode: episodeId }));
+        } catch (e) {}
+    }
+
+    function load() {
+        try {
+            const raw = localStorage.getItem(storeKey);
+            if (!raw) return null;
+            const d = JSON.parse(raw);
+            if (typeof d.season !== "number" || typeof d.episode !== "number") return null;
+            return d;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function url(vps, folder) {
+        const parts = [base, folder].map(encodeURIComponent);
+        return vps + "/video/" + parts.join("/") + "/?movie=true";
+    }
+
+    function renderTabs() {
+        Array.from(seasonsEl.children).forEach(function (c) {
+            if (c !== tabGlideEl) c.remove();
+        });
+
+        show.seasons.forEach(function (s) {
+            const b = document.createElement("button");
+            b.type = "button";
+            b.className = "tab" + (s.id === season ? " on" : "");
+            b.setAttribute("role", "tab");
+            b.setAttribute("aria-selected", s.id === season ? "true" : "false");
+            b.textContent = "Season " + String(s.id).padStart(2, "0");
+
+            b.addEventListener("click", function () {
+                if (season === s.id) return;
+                season = s.id;
+                renderTabs();
+                renderRows();
+                moveTab(false);
+                moveRow(false);
+            });
+
+            seasonsEl.appendChild(b);
+        });
+    }
+
+    function renderRows() {
+        const s = show.seasons.find(function (x) { return x.id === season; });
+
+        Array.from(listEl.children).forEach(function (c) {
+            if (c !== rowGlideEl) c.remove();
+        });
+
+        if (!s) {
+            labelEl.textContent = "—";
+            countEl.textContent = "0 episodes";
+            rowGlideEl.classList.remove("on");
+            return;
+        }
+
+        labelEl.textContent = "Season " + String(s.id).padStart(2, "0");
+        countEl.textContent = s.episodes.length + " episode" + (s.episodes.length === 1 ? "" : "s");
+
+        const cur = load();
+        const same = cur && cur.season === s.id;
+
+        s.episodes.forEach(function (e) {
+            const b = document.createElement("button");
+            b.type = "button";
+            b.className = "row";
+            b.dataset.ep = String(e.ep);
+            b.dataset.season = String(s.id);
+
+            if (same && cur.episode === e.ep) b.classList.add("on");
+
+            const epLabel = "EP" + String(e.ep).padStart(2, "0");
+            b.innerHTML =
+                '<span class="rowNum">' + epLabel + '</span>' +
+                '<span class="rowName">Episode ' + String(e.ep).padStart(2, "0") + '</span>' +
+                '<span class="rowPlay"><i class="ph-bold ph-play"></i></span>';
+
+            b.addEventListener("click", function (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                pick(s.id, e);
+            });
+
+            listEl.appendChild(b);
+        });
+
+        requestAnimationFrame(function () { moveRow(false); });
+    }
+
+    function moveTab(animate) {
+        const active = seasonsEl.querySelector(".tab.on");
+        if (!active) {
+            tabGlideEl.style.opacity = "0";
+            return;
+        }
+        const box = seasonsEl.getBoundingClientRect();
+        const tab = active.getBoundingClientRect();
+
+        if (!animate) {
+            const prev = tabGlideEl.style.transition;
+            tabGlideEl.style.transition = "none";
+            tabGlideEl.style.top = (tab.top - box.top) + "px";
+            tabGlideEl.style.height = tab.height + "px";
+            void tabGlideEl.offsetHeight;
+            tabGlideEl.style.transition = prev;
+        } else {
+            tabGlideEl.style.top = (tab.top - box.top) + "px";
+            tabGlideEl.style.height = tab.height + "px";
+        }
+        tabGlideEl.style.opacity = "1";
+    }
+
+    function moveRow(animate) {
+        const active = listEl.querySelector(".row.on");
+        if (!active) {
+            rowGlideEl.classList.remove("on");
+            return;
+        }
+        const box = listEl.getBoundingClientRect();
+        const row = active.getBoundingClientRect();
+
+        if (!animate) {
+            const prev = rowGlideEl.style.transition;
+            rowGlideEl.style.transition = "none";
+            rowGlideEl.style.top = (row.top - box.top) + "px";
+            rowGlideEl.style.height = row.height + "px";
+            void rowGlideEl.offsetHeight;
+            rowGlideEl.style.transition = prev;
+        } else {
+            rowGlideEl.style.top = (row.top - box.top) + "px";
+            rowGlideEl.style.height = row.height + "px";
+        }
+        rowGlideEl.classList.add("on");
+    }
+
+    function pick(seasonId, e, opts) {
+        const o = opts || {};
+
+        const rows = listEl.querySelectorAll(".row");
+        rows.forEach(function (r) { r.classList.remove("on"); });
+        rows.forEach(function (r) {
+            if (r.dataset.ep === String(e.ep) && r.dataset.season === String(seasonId)) {
+                r.classList.add("on");
+            }
+        });
+
+        moveRow(true);
+        save(seasonId, e.ep);
+
+        if (o.silent) return;
+
+        GetVps().then(function (vps) {
+            if (window.Player) window.Player.play(url(vps, e.folder));
+        });
+    }
+
+    function mountList() {
+        const tpl = document.getElementById("tplList");
+        const slot = document.getElementById("listMount");
+        if (!tpl || !slot) return;
+        if (!document.getElementById("seasons")) slot.appendChild(tpl.content.cloneNode(true));
+
+        seasonsEl = document.getElementById("seasons");
+        tabGlideEl = document.getElementById("tabGlide");
+        listEl = document.getElementById("list");
+        rowGlideEl = document.getElementById("rowGlide");
+        labelEl = document.getElementById("listLabel");
+        countEl = document.getElementById("listCount");
+
+        let cur = load();
+        let fresh = false;
+
+        if (!cur) {
+            cur = { season: 1, episode: 1 };
+            save(cur.season, cur.episode);
+            fresh = true;
+        }
+
+        season = cur.season;
+        renderTabs();
+        renderRows();
+
+        requestAnimationFrame(function () { moveTab(false); });
+
+        const s = show.seasons.find(function (x) { return x.id === cur.season; });
+        const e = s && s.episodes.find(function (x) { return x.ep === cur.episode; });
+        if (!e) return;
+
+        if (fresh) {
+            pick(cur.season, e, { silent: true });
+        } else {
+            setTimeout(function () { pick(cur.season, e); }, 0);
+        }
+
+        let rt = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(rt);
+            rt = setTimeout(function () {
+                moveTab(false);
+                moveRow(false);
+            }, 100);
+        });
+    }
+
+    window.List = {
+        get show() { return show; },
+        get season() { return season; },
+        pick: pick,
+        refresh: function () {
+            renderTabs();
+            renderRows();
+        },
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", mountList);
+    } else {
+        mountList();
+    }
+})();
+</script>
+
+</body>
+</html>
